@@ -1,0 +1,132 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scripts/game_over.gd" type="Script" id=1]
+[ext_resource path="res://assets/Kenney Pixel.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/Reboot.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/xcode.tres" type="Theme" id=4]
+[ext_resource path="res://assets/atlas.png" type="Texture" id=5]
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 72, 42 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 5 )
+region = Rect2( 87, 126, 42, 42 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 100
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
+font_data = ExtResource( 3 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 4 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color( 1, 1, 1, 0.929412 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.207843, 0.207843, 0.337255, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -224.0
+margin_right = 224.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 448.0
+margin_bottom = 144.0
+size_flags_vertical = 3
+
+[node name="Logo" type="TextureRect" parent="VBoxContainer"]
+margin_top = 152.0
+margin_right = 448.0
+margin_bottom = 280.0
+rect_min_size = Vector2( 128, 128 )
+texture = SubResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameOverText" type="Label" parent="VBoxContainer"]
+margin_top = 288.0
+margin_right = 448.0
+margin_bottom = 380.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Game Over"
+align = 1
+
+[node name="ScoreText" type="Label" parent="VBoxContainer"]
+margin_top = 388.0
+margin_right = 448.0
+margin_bottom = 440.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "You fixed 00 bugs!"
+align = 1
+
+[node name="VSeparator3" type="VSeparator" parent="VBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 448.0
+margin_right = 448.0
+margin_bottom = 464.0
+rect_min_size = Vector2( 0, 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NewGame" type="Button" parent="VBoxContainer"]
+margin_top = 472.0
+margin_right = 448.0
+margin_bottom = 516.0
+text = "Play again"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainMenu" type="Button" parent="VBoxContainer"]
+margin_top = 524.0
+margin_right = 448.0
+margin_bottom = 568.0
+text = "Main menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VSeparator2" type="VSeparator" parent="VBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 576.0
+margin_right = 448.0
+margin_bottom = 720.0
+size_flags_vertical = 3

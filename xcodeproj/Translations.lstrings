@@ -1,0 +1,9 @@
+// TRANSLATIONS FILE
+// lang: en-US
+
+main_msg = 		"Hello, World!"
+
+// MARK: Login
+lgn_head = 		"Please login"
+lgn_summary = 	"Please log in to Boring Tech Company Industries to continue."
+lgn_button = 	"Log in"

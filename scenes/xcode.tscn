@@ -1,0 +1,402 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://assets/xcode.tres" type="Theme" id=1]
+[ext_resource path="res://assets/atlas.png" type="Texture" id=2]
+[ext_resource path="res://assets/Reboot.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://scripts/xcode.gd" type="Script" id=4]
+[ext_resource path="res://assets/sfx/addedTime.wav" type="AudioStream" id=5]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 0.980392, 1, 0.890196 )
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+anti_aliasing = false
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 96, 9, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 168, 9, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 24, 51, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 93, 93, 30, 24 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 21, 135, 30, 24 )
+margin = Rect2( 4, 4, 4, 4 )
+filter_clip = true
+
+[sub_resource type="StyleBoxEmpty" id=8]
+content_margin_left = 4.0
+content_margin_right = 4.0
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.905882, 0.894118, 0.890196, 1 )
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 2 )
+region = Rect2( 168, 93, 24, 24 )
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0, 0, 0, 0.0627451 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
+anti_aliasing = false
+anti_aliasing_size = 4
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 2 )
+region = Rect2( 24, 93, 24, 24 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 18
+use_mipmaps = true
+font_data = ExtResource( 3 )
+
+[node name="GameWindow" type="Control"]
+margin_right = 1280.0
+margin_bottom = 720.0
+mouse_filter = 2
+input_pass_on_modal_close_click = false
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = -24.0
+margin_bottom = -24.0
+mouse_filter = 2
+theme = ExtResource( 1 )
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sidebar" type="Panel" parent="Panel/HBoxContainer"]
+margin_right = 250.0
+margin_bottom = 672.0
+rect_min_size = Vector2( 250, 0 )
+mouse_filter = 2
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="Content" type="VBoxContainer" parent="Panel/HBoxContainer/Sidebar"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 16.0
+margin_right = -16.0
+margin_bottom = -16.0
+rect_min_size = Vector2( 224, 0 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NSToolbar" type="HBoxContainer" parent="Panel/HBoxContainer/Sidebar/Content"]
+margin_right = 224.0
+margin_bottom = 32.0
+
+[node name="Close" type="TextureRect" parent="Panel/HBoxContainer/Sidebar/Content/NSToolbar"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+mouse_filter = 2
+texture = SubResource( 3 )
+expand = true
+stretch_mode = 4
+
+[node name="Minimize" type="TextureRect" parent="Panel/HBoxContainer/Sidebar/Content/NSToolbar"]
+margin_left = 40.0
+margin_right = 72.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+mouse_filter = 2
+texture = SubResource( 4 )
+expand = true
+stretch_mode = 4
+
+[node name="Fullscreen" type="TextureRect" parent="Panel/HBoxContainer/Sidebar/Content/NSToolbar"]
+margin_left = 80.0
+margin_right = 112.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+mouse_filter = 2
+texture = SubResource( 5 )
+expand = true
+stretch_mode = 4
+
+[node name="Spacer" type="VSeparator" parent="Panel/HBoxContainer/Sidebar/Content/NSToolbar"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 120.0
+margin_right = 184.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+mouse_filter = 2
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sidebar" type="TextureRect" parent="Panel/HBoxContainer/Sidebar/Content/NSToolbar"]
+margin_left = 192.0
+margin_right = 224.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+mouse_filter = 2
+texture = SubResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="Tree" type="Tree" parent="Panel/HBoxContainer/Sidebar/Content"]
+margin_top = 40.0
+margin_right = 224.0
+margin_bottom = 640.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_icons/arrow = SubResource( 7 )
+custom_styles/bg = SubResource( 8 )
+custom_constants/item_margin = 32
+custom_constants/vseparation = 8
+custom_constants/draw_relationship_lines = 1
+hide_root = true
+
+[node name="Main" type="Panel" parent="Panel/HBoxContainer"]
+margin_left = 258.0
+margin_right = 1232.0
+margin_bottom = 672.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Content" type="VBoxContainer" parent="Panel/HBoxContainer/Main"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 16.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NSToolbar" type="HBoxContainer" parent="Panel/HBoxContainer/Main/Content"]
+margin_right = 974.0
+margin_bottom = 32.0
+mouse_filter = 2
+size_flags_horizontal = 3
+
+[node name="Spacer" type="VSeparator" parent="Panel/HBoxContainer/Main/Content/NSToolbar"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 0 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Build" type="TextureRect" parent="Panel/HBoxContainer/Main/Content/NSToolbar"]
+margin_left = 40.0
+margin_right = 72.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+mouse_filter = 2
+texture = SubResource( 10 )
+expand = true
+stretch_mode = 4
+
+[node name="FlexibleSpace" type="VSeparator" parent="Panel/HBoxContainer/Main/Content/NSToolbar"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 80.0
+margin_right = 224.0
+margin_bottom = 32.0
+mouse_filter = 2
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WindowTitle" type="Label" parent="Panel/HBoxContainer/Main/Content/NSToolbar"]
+margin_left = 232.0
+margin_top = 5.0
+margin_right = 782.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 550, 0 )
+size_flags_horizontal = 3
+custom_styles/normal = SubResource( 11 )
+text = "On My Hack | About a minute remaining"
+align = 1
+
+[node name="Error" type="TextureRect" parent="Panel/HBoxContainer/Main/Content/NSToolbar"]
+margin_left = 790.0
+margin_right = 822.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+mouse_filter = 2
+texture = SubResource( 12 )
+expand = true
+stretch_mode = 4
+
+[node name="FlexibleSpace2" type="VSeparator" parent="Panel/HBoxContainer/Main/Content/NSToolbar"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 830.0
+margin_right = 974.0
+margin_bottom = 32.0
+mouse_filter = 2
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VSeparator" type="VSeparator" parent="Panel/HBoxContainer/Main/Content"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 40.0
+margin_right = 974.0
+margin_bottom = 43.0
+
+[node name="SourceView" type="HBoxContainer" parent="Panel/HBoxContainer/Main/Content"]
+margin_top = 51.0
+margin_right = 974.0
+margin_bottom = 656.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Editor" type="TextEdit" parent="Panel/HBoxContainer/Main/Content/SourceView"]
+margin_right = 974.0
+margin_bottom = 605.0
+rect_min_size = Vector2( 960, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 13 )
+custom_colors/member_variable_color = Color( 0.254902, 0.631373, 0.752941, 1 )
+custom_colors/function_color = Color( 0.403922, 0.717647, 0.643137, 1 )
+custom_colors/symbol_color = Color( 0.670588, 0.784314, 1, 1 )
+custom_colors/font_color = Color( 0.87451, 0.87451, 0.878431, 1 )
+custom_colors/background_color = Color( 0.0588235, 0.0588235, 0.0705882, 1 )
+custom_colors/number_color = Color( 0.815686, 0.74902, 0.411765, 1 )
+custom_colors/font_color_readonly = Color( 0.87451, 0.87451, 0.878431, 1 )
+custom_constants/line_spacing = 4
+text = "// AppClient.lift
+// (C) 2021 Boring Tech Company Industries
+// All rights reserved.
+import Keystore
+
+/// The main class responsible for handling network requests to our app.
+/// This should be ready for the async/await capabilities present in Lift 5.5.
+class AppClient: Networkable {
+	
+	/// The client's API token.
+	var apiToken: String = \"\"
+	
+	/// An enumeration for the different app client errors.
+	enum AppClientError: Error {
+		case .authFailed,
+		case .unknown
+	}
+	
+	/// Initialize the client by retrieving the token from a keystore.
+	init(from keystoreData: Keystore) {
+		self.apiToken = keystoreData.get_value(\"api_token\")
+	}
+	
+	/// Convenience function for getting a response from the API using URLSession.
+	private async func getApiResponse(to url: URL, as type: URLSession.HTTPRequest, with params: [String:Value] = []) -> URLSession.HTTPResponse {
+		let session = new URLSession(\"https://boringtechindustries.com\\(url)\")
+		session.setHeader(\"Authorization\", \"Bearer: \\(apiToken)\")
+		session.setHeader(\"Key-Handles-Undirected-Dispatch\", \"0\")
+		session.requestType = type
+		session.requestParams = params
+		return await session.makeRequest()
+	}
+	
+	/// Returns whether the client is authenticated properly.
+	async func verifyAuth() -> Bool {
+		let response = await self.getApiResponse(to: \"/api/v1/verify_credentials\", as: .get)
+		return response.code == .OK
+	}
+	
+	/// Returns a ClientData struct containing the user's account information.
+	/// FIXME: @Painite, could we be more succinct or explanatory with our throws here?
+	async func getAccountData() throws -> ClientData {
+		let response = await self.getApiResponse(to: \"/api/v1/accounts\", as: .get)
+		guard response.code == .OK else { throw AppClientError.unknown }
+		return new AccountData(decodedFrom: response.body)
+	}
+	
+	/// Updates the user's profile picture to a specified image.
+	async func updateProfilePicture(to image: ImageData) throws -> None {
+		do {
+			let accountData = try await self.getAccountData()
+			let response = await self.getApiResponse(
+				to: \"/api/v1/accounts/\\(accountData.id)/update\",
+				as: .post,
+				with: [\"profile_picture\": str(image.encoded(.base64))]
+			)
+			if response.code != .OK { throw AppClientError.unknown }
+		} catch { throw AppClientError.unknown }
+	}
+	
+}
+"
+readonly = true
+syntax_highlighting = true
+show_line_numbers = true
+breakpoint_gutter = true
+fold_gutter = true
+context_menu_enabled = false
+shortcut_keys_enabled = false
+virtual_keyboard_enabled = false
+selecting_enabled = false
+wrap_enabled = true
+minimap_draw = true
+minimap_width = 90
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Alert" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )

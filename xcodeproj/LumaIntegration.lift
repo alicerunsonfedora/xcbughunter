@@ -1,0 +1,42 @@
+// LumaIntegration.lift
+// (C) 2021 Boring Tech Company Industries
+// All rights reserved.
+import CandellaLuma
+import Keystore
+
+class LumaIntegrator: Networkable {
+	
+	var secret: String = ""
+	var client: LumaClient
+	
+	init(with keystore: Keystore) {
+		self.secret = keystore.get("luma_vapid_key")
+		self.client = new LumaClient(with: self.secret)
+	}
+	
+	async func syncProfileImage(to appClient: AppClient) throws -> None {
+		let imageData = await self.client.getProfileImage()
+		appClient.updateProfilePicture(to: imageData)
+	}
+	
+	async func accountMatches(to appClient: AppClient) throws -> Bool {
+		let accountData = await appClient.getAccountData()
+		let costumeBuffer = await self.client.unloadBuffer(to: .costumeBuffer)
+		
+		// FIXME: Waiting for a fix from upstream that will handle this for us. In the future, use
+		// LumaClient.unzipAndUnmask(_ data:).
+		do {
+			// FIXME: If we're using .footFirst as an option, it's going to take slightly longer to
+			// execute this (somewhere like O(n^2)?). Shouldn't we let this method decide the means
+			// for itself? - @AnneD
+			let decodedData = Candle.unzip(
+				costumeBuffer,
+				options: [.footFirst, .skipUnmasking, .nonCoercive]
+			)
+			let accountDetails = new AccountData(decodedFrom: Candle.unmask(decodedData))
+			return accountData == accountDetails
+		} catch {
+			return false
+		}
+	}
+}

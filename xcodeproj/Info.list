@@ -1,0 +1,15 @@
+<appdata>
+	<name>My Project</name>
+	<identifier>com.boringtechindustries.coolapp</identifier>
+	<teamIdentifier>FCKM00DC3230</teamIdentifier>
+	<osRequires>
+		<winblows>11.0</winblows>
+		<hackOS>12.0</hackOS>
+		<eyeOS>13.0<eyeOS>
+	</osRequires>
+	<entitlements>
+		<entitlement>app.network_access</entitlement>
+		<entitlement>app.file_system_read</entitlement>
+	</entitlements>
+	<signingIdentity>App Development</signingIdentity>
+</appdata>

@@ -1,0 +1,12 @@
+// main.lift
+// (C) 2021 Boring Tech Company Industries
+// All rights reserved.
+
+
+/* The entrypoint of your application. */
+@main struct MainApp: Main {
+	var body: Body {
+		AppView()
+		Settings()
+	}
+}

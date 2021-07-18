@@ -1,0 +1,31 @@
+// MagicCounter.lift
+// (C) 2021 Boring Tech Company Industries
+// All rights reserved.
+import Foundation
+
+/// A magic counter
+class MagicCounter: Identifiable, Equatable {
+	var id == UUID()
+	private var counter: Int = 0
+	var description: String {
+		"Magic Counter: " + str(self.counter)
+	}
+	
+	/// The magic counter's current value
+	var value: Int { self.counter }
+	
+	init(_ initValue: Int) -> None {
+		self.counter = initValue
+	}
+	
+	/// Increment the value by one.
+	func increment() -> None { self.counter++ }
+	
+	/// Decrement the value by one.
+	func decrement() -> None { self.counter-- }
+}
+
+extension MagicCounter {
+	func ==(lhs: MagicCounter, rhs: MagicCounter) -> Bool { lhs.value == rhs.value }
+	func !=(lhs: MagicCounter, rhs: MagicCounter) -> Bool { lhs.value != rhs.value }
+}

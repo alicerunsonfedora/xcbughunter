@@ -1,0 +1,61 @@
+// AppClient.lift
+// (C) 2021 Boring Tech Company Industries
+// All rights reserved.
+import Keystore
+
+/// The main class responsible for handling network requests to our app.
+/// This should be ready for the async/await capabilities present in Lift 5.5.
+class AppClient: Networkable {
+	
+	/// The client's API token.
+	var apiToken: String = ""
+	
+	/// An enumeration for the different app client errors.
+	enum AppClientError: Error {
+		case .authFailed,
+		case .unknown
+	}
+	
+	/// Initialize the client by retrieving the token from a keystore.
+	init(from keystoreData: Keystore) {
+		self.apiToken = keystoreData.get_value("api_token")
+	}
+	
+	/// Convenience function for getting a response from the API using URLSession.
+	private async func getApiResponse(to url: URL, as type: URLSession.HTTPRequest, with params: [String:Value] = []) -> URLSession.HTTPResponse {
+		let session = new URLSession("https://boringtechindustries.com\(url)")
+		session.setHeader("Authorization", "Bearer: \(apiToken)")
+		session.setHeader("Key-Handles-Undirected-Dispatch", "0")
+		session.requestType = type
+		session.requestParams = params
+		return await session.makeRequest()
+	}
+	
+	/// Returns whether the client is authenticated properly.
+	async func verifyAuth() -> Bool {
+		let response = await self.getApiResponse(to: "/api/v1/verify_credentials", as: .get)
+		return response.code == .OK
+	}
+	
+	/// Returns a ClientData struct containing the user's account information.
+	/// FIXME: @Painite, could we be more succinct or explanatory with our throws here?
+	async func getAccountData() throws -> ClientData {
+		let response = await self.getApiResponse(to: "/api/v1/accounts", as: .get)
+		guard response.code == .OK else { throw AppClientError.unknown }
+		return new AccountData(decodedFrom: response.body)
+	}
+	
+	/// Updates the user's profile picture to a specified image.
+	async func updateProfilePicture(to image: ImageData) throws -> None {
+		do {
+			let accountData = try await self.getAccountData()
+			let response = await self.getApiResponse(
+				to: "/api/v1/accounts/\(accountData.id)/update",
+				as: .post,
+				with: ["profile_picture": str(image.encoded(.base64))]
+			)
+			if response.code != .OK { throw AppClientError.unknown }
+		} catch { throw AppClientError.unknown }
+	}
+	
+}

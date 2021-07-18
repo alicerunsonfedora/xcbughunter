@@ -1,0 +1,16 @@
+// AppView.lift
+// (C) 2021 Boring Tech Company Industries
+// All rights reserved.
+import AppGenerator
+
+/// The main window structure for your application.
+struct AppView: View {
+	var body: some View {
+		Window()
+			.title("Do you even lift?")
+			.status(
+				Text("br0?")
+			)
+		
+	}
+}

@@ -1,0 +1,16 @@
+// Assets Library
+// v2.0
+
+// To supply your own icons, write the various sizes here along with the path to the images
+// needed.
+//
+// Example:
+// 16px = "./Resources/Icons/icon_16.png"
+[Icons]
+use_default = true
+
+// Supply custom paths to images here.
+[Images]
+
+// Supply custom colors here.
+[Colors]
