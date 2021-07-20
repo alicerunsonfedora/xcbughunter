@@ -29,10 +29,9 @@ jobs:
           debugMode: "false"
       - name: Copy XCBugHunter pack file
         run: |
-          cp build/*.pck clickable/
+          cp build/*.pck .
       - name: Run Clickable
         run: |
-          cd clickable
           clickable build
       - name: Upload click package artifact
         uses: actions/upload-artifact@v2
