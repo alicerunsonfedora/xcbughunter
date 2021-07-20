@@ -24,12 +24,12 @@ jobs:
         id: build_godot
         uses: josephbmanley/build-godot-action@v1.4.1
         with:
-          name: "costumemaster"
+          name: "xcbughunter"
           preset: "Linux/X11" 
           debugMode: "false"
       - name: Copy XCBugHunter pack file
         run: |
-          cp ../dist/*.pck clickable/
+          cp build/*.pck clickable/
       - name: Run Clickable
         run: |
           cd clickable
