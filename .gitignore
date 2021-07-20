@@ -4,6 +4,7 @@ export_presets.cfg
 **.translation
 
 .DS_Store
-.build/
-.godot-ubports/
-clickable/
+
+clickable/build/
+clickable/.godot-ubports/
+clickable/.clickable/
