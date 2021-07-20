@@ -1,0 +1,41 @@
+name: Clickable
+on: [push]
+
+jobs:
+  build:
+    name: Create clickable package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone source
+        uses: actions/checkout@v2
+      - name: Install clickable dependencies
+        run: |
+          sudo add-apt-repository ppa:bhdouglass/clickable
+          sudo apt update
+          sudo apt install -y containerd docker.io runc clickable
+          sudo systemctl unmask docker.service
+          sudo systemctl start docker.service
+      - name: Add export_presets.cfg
+        run: | 
+          echo $EXPORT_PRESETS_CFG > export_presets.cfg
+        env:
+          EXPORT_PRESETS_CFG: ${{ secrets.EXPORT_PRESETS_CFG }}
+      - name: Build Godot project
+        id: build_godot
+        uses: josephbmanley/build-godot-action@v1.4.1
+        with:
+          name: "costumemaster"
+          preset: "Linux/X11" 
+          debugMode: "false"
+      - name: Copy XCBugHunter pack file
+        run: |
+          cp ../dist/*.pck clickable/
+      - name: Run Clickable
+        run: |
+          cd clickable
+          clickable build
+      - name: Upload click package artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: xcbughunter_clickable
+          path: clickable/build/**.click
