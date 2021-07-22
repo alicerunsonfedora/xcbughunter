@@ -34,13 +34,16 @@ func _bug_click(_viewport, event: InputEvent, _shape_idx) -> void:
 		timer.start()
 	score += 1
 	bug_squisher.play()
+	$Bloodbath.restart()
+	$Bloodbath.emitting = true
 	_relocate_bug()
 	window.update_source_editor_random()
 
 func _relocate_bug() -> void:
 	if not Globals.ran_first_time:
-		bug.global_position = Vector2(rand_range(32, 200), rand_range(32, 720-32))
 		return
+		
+	$Bloodbath.global_position = bug.global_position
 	
 	var x_offset = 32 * (score / 2) if score < 15 else 300
 	var y_offset = 32 * (score / 2) if score < 15 else 96

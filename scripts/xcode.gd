@@ -37,7 +37,8 @@ func update_source_editor_random() -> void:
 
 func update_window_title_with_remaining(time_remaining: int, score: int = 0) -> void:
 	win_title.text = "" if score < 1 else "(Score: %s) " % score
-	win_title.text += "On My Hack | %s seconds remaining" % time_remaining
+	win_title.text += ("On My Hack | %s seconds remaining" % time_remaining) if time_remaining > 0 else\
+		"On My Hack | Build finished"
 
 func _create_structure() -> void:
 	var xcodeproj_dir := Directory.new()
