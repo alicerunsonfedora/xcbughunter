@@ -5,6 +5,11 @@ jobs:
   build:
     name: Create clickable package
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        architectures:
+          - armhf
+          - arm64
     steps:
       - name: Clone source
         uses: actions/checkout@v2
@@ -16,7 +21,7 @@ jobs:
           sudo systemctl unmask docker.service
           sudo systemctl start docker.service
       - name: Add export_presets.cfg
-        run: | 
+        run: |
           echo $EXPORT_PRESETS_CFG > export_presets.cfg
         env:
           EXPORT_PRESETS_CFG: ${{ secrets.EXPORT_PRESETS_CFG }}
@@ -34,6 +39,8 @@ jobs:
         run: |
           cd clickable
           clickable build
+        env:
+          CLICKABLE_ARCH: ${{ matrix.architectures }}
       - name: Upload click package artifact
         uses: actions/upload-artifact@v2
         with:
