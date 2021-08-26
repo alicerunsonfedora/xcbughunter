@@ -7,4 +7,4 @@ export_presets.cfg
 
 clickable/build/
 clickable/.godot-ubports/
-clickable/.clickable/
+clickable/.clickable/dist
