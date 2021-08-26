@@ -1,32 +1,39 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/atlas.png" type="Texture" id=1]
 [ext_resource path="res://scenes/xcode.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/sfx/squash.wav" type="AudioStream" id=3]
 [ext_resource path="res://scripts/gameloop.gd" type="Script" id=4]
 [ext_resource path="res://assets/Kenney Pixel.ttf" type="DynamicFontData" id=5]
-[ext_resource path="res://assets/bgm/chill.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/bgm/chill.ogg" type="AudioStream" id=6]
+[ext_resource path="res://assets/bonusbug.gdshader" type="Shader" id=7]
+[ext_resource path="res://assets/sfx/bonusNoise.wav" type="AudioStream" id=8]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 72, 42 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
 region = Rect2( 159, 126, 42, 42 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 32
 font_data = ExtResource( 5 )
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
 region = Rect2( 168, 48, 27, 30 )
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=5]
 radius = 23.2676
 
-[sub_resource type="Gradient" id=6]
+[sub_resource type="ShaderMaterial" id=6]
+render_priority = 1
+shader = ExtResource( 7 )
+shader_param/bonus = Color( 0.764706, 0.309804, 0.309804, 1 )
+
+[sub_resource type="Gradient" id=7]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 4 )
@@ -59,6 +66,8 @@ __meta__ = {
 [node name="Tutorial" type="Control" parent="UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 0.445557
+margin_right = 0.445557
 mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -73,7 +82,7 @@ margin_top = 193.525
 margin_right = -757.676
 margin_bottom = 193.525
 mouse_filter = 2
-texture = SubResource( 5 )
+texture = SubResource( 2 )
 expand = true
 stretch_mode = 6
 __meta__ = {
@@ -89,7 +98,7 @@ margin_left = 33.9517
 margin_top = 72.1817
 margin_right = 354.952
 margin_bottom = 138.182
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Click on the bug to squash it. Can you find them all?"
 align = 3
@@ -107,7 +116,7 @@ one_shot = true
 
 [node name="Bug" type="Sprite" parent="."]
 position = Vector2( 145.271, 562.653 )
-texture = SubResource( 3 )
+texture = SubResource( 4 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -123,10 +132,40 @@ collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bug/Detector"]
 position = Vector2( 0.0436401, 0.104645 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="Squash" type="AudioStreamPlayer2D" parent="Bug"]
 stream = ExtResource( 3 )
+
+[node name="BonusBug" type="Sprite" parent="."]
+visible = false
+material = SubResource( 6 )
+position = Vector2( 937.481, 393.898 )
+rotation = 0.785398
+texture = SubResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Detector" type="Area2D" parent="BonusBug"]
+z_index = 1
+z_as_relative = false
+priority = 10.0
+monitoring = false
+monitorable = false
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BonusBug/Detector"]
+position = Vector2( 0.0436401, 0.104645 )
+shape = SubResource( 5 )
+
+[node name="Squash" type="AudioStreamPlayer2D" parent="BonusBug"]
+stream = ExtResource( 8 )
+
+[node name="Timer" type="Timer" parent="BonusBug"]
+wait_time = 5.0
+autostart = true
 
 [node name="Bloodbath" type="CPUParticles2D" parent="."]
 position = Vector2( 145.271, 562.653 )
@@ -141,7 +180,7 @@ initial_velocity = 1.0
 radial_accel = 1.0
 scale_amount = 4.0
 scale_amount_random = 0.5
-color_ramp = SubResource( 6 )
+color_ramp = SubResource( 7 )
 
 [node name="Theme" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )

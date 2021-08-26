@@ -1,5 +1,9 @@
 extends Node2D
 
+onready var bonus := $BonusBug
+onready var bonus_collider := $BonusBug/Detector
+onready var bonus_squisher := $BonusBug/Squash
+onready var bonus_timer := $BonusBug/Timer
 onready var bug := $Bug
 onready var bug_collider := $Bug/Detector
 onready var bug_squisher := $Bug/Squash
@@ -12,6 +16,8 @@ func _ready() -> void:
 	$IncrementedTimer.connect("timeout", self, "_second_passes")
 	$GameTimer.connect("timeout", self, "_game_over")
 	bug_collider.connect("input_event", self, "_bug_click")
+	bonus_collider.connect("input_event", self, "_bonus_click")
+	bonus_timer.connect("timeout", self, "_bonus_timeout")
 	_relocate_bug()
 	
 	if Globals.ran_first_time:
@@ -24,6 +30,23 @@ func _second_passes() -> void:
 func _game_over() -> void:
 	Globals.recent_score = score
 	get_tree().change_scene("res://scenes/game_over.tscn")
+
+func _bonus_click(_viewport, event: InputEvent, _shape_idx) -> void:
+	if not event is InputEventMouseButton and not event.is_pressed():
+		return
+	score += 3
+	bonus_squisher.play()
+	$Bloodbath.restart()
+	$Bloodbath.emitting = true
+	_relocate_bonus_bug()
+	bonus.visible = false
+	bonus_timer.stop()
+	bonus_timer.start()
+	window.update_source_editor_random()
+	
+func _bonus_timeout() -> void:
+	bonus.visible = not bonus.visible
+	_relocate_bonus_bug()
 
 func _bug_click(_viewport, event: InputEvent, _shape_idx) -> void:
 	if not event is InputEventMouseButton and not event.is_pressed():
@@ -38,6 +61,19 @@ func _bug_click(_viewport, event: InputEvent, _shape_idx) -> void:
 	$Bloodbath.emitting = true
 	_relocate_bug()
 	window.update_source_editor_random()
+
+func _relocate_bonus_bug() -> void:
+	if not Globals.ran_first_time:
+		return
+		
+	$Bloodbath.global_position = bug.global_position
+	
+	var x_offset = 32 * (score / 2) if score < 15 else 300
+	var y_offset = 32 * (score / 2) if score < 15 else 96
+	bonus.global_position = Vector2(
+		clamp(rand_range(x_offset, 1280-32), 0, 1280 - 32),
+		clamp(rand_range(y_offset, 720-32), 0, 720 - 32)
+	)
 
 func _relocate_bug() -> void:
 	if not Globals.ran_first_time:
