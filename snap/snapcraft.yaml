@@ -1,5 +1,5 @@
 name: bug-bounty
-version: '1.1.0'
+version: '1.2.0'
 base: core20
 summary: Fix all the bugs!
 description : |
