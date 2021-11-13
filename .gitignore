@@ -9,3 +9,4 @@ clickable/build/
 clickable/.godot-ubports/
 clickable/.clickable/dist
 .mono/
+dist/
