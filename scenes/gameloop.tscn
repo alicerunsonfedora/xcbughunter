@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/atlas.png" type="Texture" id=1]
 [ext_resource path="res://scenes/xcode.tscn" type="PackedScene" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://scripts/gameloop.gd" type="Script" id=4]
 [ext_resource path="res://assets/Kenney Pixel.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://assets/bgm/chill.ogg" type="AudioStream" id=6]
-[ext_resource path="res://assets/bonusbug.gdshader" type="Shader" id=7]
 [ext_resource path="res://assets/sfx/bonusNoise.wav" type="AudioStream" id=8]
 
 [sub_resource type="AtlasTexture" id=1]
@@ -21,17 +20,16 @@ region = Rect2( 159, 126, 42, 42 )
 size = 32
 font_data = ExtResource( 5 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 1 )
 region = Rect2( 168, 48, 27, 30 )
 
 [sub_resource type="CircleShape2D" id=5]
 radius = 23.2676
 
-[sub_resource type="ShaderMaterial" id=6]
-render_priority = 1
-shader = ExtResource( 7 )
-shader_param/bonus = Color( 0.764706, 0.309804, 0.309804, 1 )
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 24, 174, 27, 30 )
 
 [sub_resource type="Gradient" id=7]
 
@@ -98,8 +96,8 @@ margin_left = 33.9517
 margin_top = 72.1817
 margin_right = 354.952
 margin_bottom = 138.182
-custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 3 )
 text = "Click on the bug to squash it. Can you find them all?"
 align = 3
 autowrap = true
@@ -116,7 +114,7 @@ one_shot = true
 
 [node name="Bug" type="Sprite" parent="."]
 position = Vector2( 145.271, 562.653 )
-texture = SubResource( 4 )
+texture = SubResource( 8 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -124,11 +122,11 @@ __meta__ = {
 [node name="Detector" type="Area2D" parent="Bug"]
 z_index = 1
 z_as_relative = false
-priority = 10.0
-monitoring = false
-monitorable = false
 collision_layer = 7
 collision_mask = 7
+monitoring = false
+monitorable = false
+priority = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bug/Detector"]
 position = Vector2( 0.0436401, 0.104645 )
@@ -139,7 +137,6 @@ stream = ExtResource( 3 )
 
 [node name="BonusBug" type="Sprite" parent="."]
 visible = false
-material = SubResource( 6 )
 position = Vector2( 937.481, 393.898 )
 rotation = 0.785398
 texture = SubResource( 4 )
@@ -150,11 +147,11 @@ __meta__ = {
 [node name="Detector" type="Area2D" parent="BonusBug"]
 z_index = 1
 z_as_relative = false
-priority = 10.0
-monitoring = false
-monitorable = false
 collision_layer = 7
 collision_mask = 7
+monitoring = false
+monitorable = false
+priority = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BonusBug/Detector"]
 position = Vector2( 0.0436401, 0.104645 )

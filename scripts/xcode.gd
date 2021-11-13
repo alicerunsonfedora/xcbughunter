@@ -65,7 +65,7 @@ func _make_tree() -> void:
 	
 func _load_file(filename: String) -> void:
 	var file = File.new()
-	var contents = file.open("res://xcodeproj/" + filename, File.READ)
+	var _contents = file.open("res://xcodeproj/" + filename, File.READ)
 	editor.text = file.get_as_text()
 	if filename.ends_with(".lift"):
 		editor.add_color_region("@", " ", Color("#fc5fa3"))

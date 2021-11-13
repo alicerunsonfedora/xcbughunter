@@ -1,0 +1,9 @@
+/Users/marquis/Developer/BugBounty/.mono/temp/bin/Debug/Bug Bounty!.dll
+/Users/marquis/Developer/BugBounty/.mono/temp/bin/Debug/Bug Bounty!.pdb
+/Users/marquis/Developer/BugBounty/.mono/temp/obj/Debug/Bug Bounty!.csproj.AssemblyReference.cache
+/Users/marquis/Developer/BugBounty/.mono/temp/obj/Debug/Bug Bounty!.GeneratedMSBuildEditorConfig.editorconfig
+/Users/marquis/Developer/BugBounty/.mono/temp/obj/Debug/Bug Bounty!.AssemblyInfoInputs.cache
+/Users/marquis/Developer/BugBounty/.mono/temp/obj/Debug/Bug Bounty!.AssemblyInfo.cs
+/Users/marquis/Developer/BugBounty/.mono/temp/obj/Debug/Bug Bounty!.csproj.CoreCompileInputs.cache
+/Users/marquis/Developer/BugBounty/.mono/temp/obj/Debug/Bug Bounty!.dll
+/Users/marquis/Developer/BugBounty/.mono/temp/obj/Debug/Bug Bounty!.pdb
